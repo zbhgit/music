@@ -5,16 +5,24 @@
   z-index: 10;
   width: 100%;
   height: 100%;
-  background: url("../img/detailsBg.jpg") no-repeat;
+  //background: url("../img/detailsBg.jpg") no-repeat;
   background-size: cover;
   background-position: bottom;
+  .blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+  }
   .details_title {
     position: absolute;
     top: 0;
     width: 100%;
     line-height: 40px;
     height: 40px;
-    background-color: rgba(41, 171, 226, 0.6);
+    background-color: rgba(0,0,0, 0.1);
     font-size: 20px;
     text-align: center;
     color: white;
@@ -22,6 +30,8 @@
       span {
         font-size: 14px;
         color: lightblue;
+        padding-left: 10px;
+
       }
     }
     .detail_tip_wrapper {
@@ -62,20 +72,24 @@
         height: 2px;
         background: #fff;
         .audio_proUp {
-          width: 50%;
+          width: 0;
           height: 2px;
           background: #29abe2;
         }
         .audio_proBar {
+          box-sizing: border-box;
           position: absolute;
           top: 0;
-          left: 50%;
-          transform: translateY(-41%);
-          width: 15px;
-          height: 15px;
-          background: #29abe2;
-          border-radius: 8px;
-
+          left: 0;
+          padding:10px;
+          margin-left:-17px;
+          transform: translateY(-46%);
+          div {
+            width: 15px;
+            height: 15px;
+            background: #29abe2;
+            border-radius: 8px;
+          }
         }
       }
       .nowTime {
@@ -96,11 +110,25 @@
       justify-content: space-between;
       width: 200px;
       margin: 0 auto;
-      .play {
+      .detailPlay {
+        position: relative;
         width: 55px;
         height: 55px;
-        background: url("../img/details_play.png") no-repeat;
-        background-size: cover;
+        .play {
+          position: absolute;
+          width: 55px;
+          height: 55px;
+          background: url("../img/details_play.png") no-repeat;
+          background-size: cover;
+        }
+        .pause {
+          position: absolute;
+          display: none;
+          width: 55px;
+          height: 55px;
+          background: url("../img/details_pause.png") no-repeat;
+          background-size: cover;
+        }
       }
       .prev {
         width: 37px;

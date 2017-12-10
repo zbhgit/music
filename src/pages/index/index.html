@@ -6,34 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
-  <style>
-    html {
-      height: 100%;
-    }
 
-    body {
-      margin: 0;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #wrap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    #scroll {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #999999;
-    }
-  </style>
 </head>
 
 <body>
@@ -46,15 +19,19 @@
       </ul>
     </div>
     <div id="list_audio" class="list_audio">
-      <img class="list_audioImg" src="./img/fannaoge.jpg" alt="">
-      <div class="list_audioText">
+      <img id="list_audioImg" class="list_audioImg " src="" alt="">
+      <div id="list_audioText" class="list_audioText">
         <h3 class="title">歌曲名字</h3>
         <p class="name">歌手</p>
       </div>
-      <div class="list_audioBtn"></div>
+      <div id="list_audioBtn" class="list_audioBtn">
+        <span id="list_play" class="list_play"></span>
+        <span id="list_pause" class="list_pause"></span>
+      </div>
     </div>
   </div>
   <div id="musicDetails">
+    <div class="blur"></div>
     <div class="details_title">
       <div class="detail_name">异乡人 <span>歌手</span></div>
       <div class="detail_tip_wrapper">
@@ -64,17 +41,22 @@
     <div class="details_lyric"></div>
     <div class="details_audio">
       <div class="audio_wrapper">
-        <div class="nowTime">00:00</div>
+        <div id="detailNowTime" class="nowTime"></div>
         <div class="audio_pro">
-          <div class="audio_proUp"></div>
-          <div class="audio_proBar"></div>
+          <div id="detailProUp" class="audio_proUp"></div>
+          <div id="detailProBar" class="audio_proBar">
+            <div></div>
+          </div>
         </div>
-        <div class="allTime">00:00</div>
+        <div id="detailAllTime" class="allTime"></div>
       </div>
       <div class="control_wrapper">
-        <div class="prev"></div>
-        <div class="play"></div>
-        <div class="next"></div>
+        <div id="detailPrev" class="prev"></div>
+        <div id="detailPlay" class="detailPlay">
+          <span id="play" class="play"></span>
+          <span id="pause" class="pause"></span>
+        </div>
+        <div id="detailNext" class="next"></div>
       </div>
       <ul class="detail_btn">
         <li class="active"></li>
@@ -82,6 +64,7 @@
       </ul>
     </div>
   </div>
+  <audio id="myAudio" src=""></audio>
 </div>
 </body>
 

@@ -1,5 +1,5 @@
 import musicDetail from './music_detail';
-
+import musicAudio from './music_audio';
 const $listContentUl = $('#list_contentUl');
 const $listContent = $('.list_content');
 const $list_audio = $('#list_audio');
@@ -24,10 +24,11 @@ let childHeight = $listContentUl.height();
 let onOff1 = true;
 let onOff2 = true;
 let onOff3 = true;
-let timer;
 // 手指离开时的速度
 let speed = 1;
-
+let timer;
+// 添加索引
+let index;
 function init() {
   data();
   moveScroll();
@@ -52,12 +53,12 @@ function data() {
 function bind() {
   $listContentUl.on(touchend, 'li', function () {
     if (onOff3) {
-      $(this).addClass('active').siblings().removeClass('active')
+      $(this).addClass('active').siblings().removeClass('active');
+      const id = $(this).attr('data-id');
+      index = $(this).index();
+      musicAudio.loadMusic(id,index)
     }
   });
-  $list_audio.on(touchstart,function () {
-    musicDetail.slideUp();
-  })
 }
 
 // 滑动列表
