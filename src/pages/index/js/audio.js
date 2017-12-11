@@ -29,31 +29,31 @@ function play() {
   onOff = false;
   $listAudioImg.addClass('rotate');
   $listPlay.fadeOut(300);
-    $listPause.fadeIn(300);
   $detailPlay.fadeOut(300);
-    $detailPause.fadeIn(300);
+  $listPause.fadeIn(300);
+  $detailPause.fadeIn(300);
   myAudio.play();
 }
 // 暂停
 function pause() {
   $listAudioImg.removeClass('rotate');
   $listPause.fadeOut(300);
-    $listPlay.fadeIn(300);
   $detailPause.fadeOut(300);
+  $listPlay.fadeIn(300);
   $detailPlay.fadeIn(300);
   myAudio.pause();
 }
 // 下一首歌儿
 function next() {
   const length = $('#list_contentUl').find('li').length;
-  const target= currentIndex === length ? 0 : currentIndex + 1;
+  const target = currentIndex === length ? 0 : currentIndex - 1;
   return target;
 }
 // 上一首歌儿
 
 function prev() {
   const length = $('#list_contentUl').find('li').length;
-  const target2 = currentIndex===0 ? length-1 : currentIndex - 1;
+  const target2 = currentIndex === 0 ? length - 1 : currentIndex + 1;
   return target2;
 }
 

@@ -51,7 +51,6 @@ function slideDown() {
 }
 
 
-
 function bind() {
   $detailTipWrapper.on(touchstart, function () {
     slideDown();
@@ -66,11 +65,11 @@ function bind() {
     return false;
   });
   $detailProBar.on(touchstart, function (ev) {
+    audio.pause();
     const This = this;
     const touch = ev.originalEvent.changedTouches ? ev.originalEvent.changedTouches[0] : ev;
     disX = touch.pageX - $(this).position().left;
     $(document).on(touchmove + '.move', function (ev) {
-      audio.pause();
       const touch = ev.originalEvent.changedTouches ? ev.originalEvent.changedTouches[0] : ev;
 
       let L = touch.pageX - disX;
@@ -79,7 +78,7 @@ function bind() {
       } else if (L > parentWidth) {
         L = parentWidth;
       }
-      scale = L / parentWidth > 0.99 ? 0.99 :  L / parentWidth;
+      scale = L / parentWidth > 0.99 ? 0.99 : L / parentWidth;
       $(This).css('left', `${scale * 100}%`);
       $detailProUp.css('width', `${scale * 100}%`);
       myAudio.currentTime = myAudio.duration * scale;
@@ -92,19 +91,23 @@ function bind() {
       $(this).off('.move');
     })
   });
-  $detailPrev.on(touchstart,function () {
+  $detailPrev.on(touchstart, function () {
     const targetIndex = audio.prev();
-    const id =  $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
-    musicAjax.loadMusic(id, targetIndex)
+    const id = $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
+    musicAjax.loadMusic(id, targetIndex);
+    changeActiveLi(targetIndex);
+    return false
   });
-  $detailNext.on(touchstart,function () {
+  $detailNext.on(touchstart, function () {
     const targetIndex = audio.prev();
-    const id =  $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
-    musicAjax.loadMusic(id, targetIndex)
+    const id = $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
+    musicAjax.loadMusic(id, targetIndex);
+    changeActiveLi(targetIndex);
+    return false
   });
 
   // 加载结束可播放
-  $(myAudio).on('canplay', function () {
+  $(myAudio).on('canplaythrough', function () {
     audio.play();
     const allTime = audio.formatTime(myAudio.duration);
     $detailAllTime.html(allTime)
@@ -121,15 +124,22 @@ function bind() {
   });
   // 暂停
   $(myAudio).one('pause', function () {
+    audio.pause();
     clearInterval(timer);
   });
   // 播放结束
   $(myAudio).on('ended', function () {
     clearInterval(timer);
     const targetIndex = audio.next();
-    const id =  $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
-    musicAjax.loadMusic(id, targetIndex)
+    const id = $('#list_contentUl').find('li').eq(targetIndex).attr('data-id');
+    musicAjax.loadMusic(id, targetIndex);
+    changeActiveLi(targetIndex);
   });
+}
+
+function changeActiveLi(index) {
+  console.log('change');
+  $('#list_contentUl').find('li').eq(index).addClass('active').siblings().attr('class', '')
 }
 export default {
   init,
