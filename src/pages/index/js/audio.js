@@ -42,6 +42,7 @@ function pause() {
   $listPlay.fadeIn(300);
   $detailPlay.fadeIn(300);
   myAudio.pause();
+
 }
 // 下一首歌儿
 function next() {
